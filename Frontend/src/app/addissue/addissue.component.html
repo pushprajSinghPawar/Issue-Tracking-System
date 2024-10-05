@@ -1,0 +1,48 @@
+<form [formGroup]="issueAddForm" (ngSubmit)="addissueFinal()" autocomplete="new-password">
+    <h1>Issue Form</h1>
+
+    <div class="form-control">
+        <label for="softwareName">Software Name</label>
+        <select formControlName="softwareName" id="softwareName">
+            <option *ngFor="let spec of specs" value="{{spec}}">{{spec}}</option>
+        </select>
+    </div>
+
+    <div class="form-control">
+        <label for="name">Software issue Title</label>
+        <input formControlName="softwareIssueTitle" id="softwareIssueTitle" autocomplete="new-password" type="text"
+            placeholder="softwareIssueTitle must not be blank and more than 30" />
+    </div>
+
+
+    <div class="form-control">
+        <label for="name">Software issue Type</label>
+        <input formControlName="softwareIssueType" id="softwareIssueType" autocomplete="new-password" type="text"
+            placeholder="softwareIssueType must not be blank and more than 30" />
+    </div>
+
+    <div class="form-control">
+        <label for="softwareIssueDescription">Software Issue Description</label>
+        <textarea formControlName="softwareIssueDescription" id="softwareIssueDescription" autocomplete="new-password"
+            placeholder="Software Issue Description must not be blank and more than 400"></textarea>
+    </div>
+    <div class="pricetag">
+        Payment is optional if you pay your issue will be marked as high priority
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.045 3.007 12.31 3a1.965 1.965 0 0 0-1.4.585l-7.33 7.394a2 2 0 0 0 0 2.805l6.573 6.631a1.957 1.957 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 21 11.479v-5.5a2.972 2.972 0 0 0-2.955-2.972Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
+        </svg> 0.05 $
+    </div>
+    <div #paymentRef></div>
+    <p  *ngIf="showPaidDeatils" class="alert alert-success" role="alert">
+        {{dtls["status"]}}
+        {{dtls["transactinfo"]}}
+        
+    </p>
+    <p class="alert alert-error" role="alert">
+        {{PaymenterrorMessage}}
+    </p>
+
+
+
+    <button type="submit">Add Issue &#8594;</button>
+</form>

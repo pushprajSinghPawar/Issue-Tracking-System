@@ -1,0 +1,62 @@
+.loginpage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    width: 100vw;
+    background-color: #f9f9f9;
+    background-image: url("../../assets/photo3.jpg");
+    background-size: contain;
+}
+
+.loginpage form {
+    width: 30%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 600px;
+    border: 2px solid black;
+}
+
+.loginpage .sidepage {
+    border: 2px solid black;
+    width: 30%;
+    border-radius: 8px;
+    background-image: url("../../assets/loginphoto.png");
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+}
+
+.loginpage h1 {
+    margin-top: 25%;
+    margin-bottom: 5%;
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+}
+
+.loginpage input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.loginpage button {
+    width: 100%;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.loginpage .form-control {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

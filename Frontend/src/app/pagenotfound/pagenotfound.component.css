@@ -1,0 +1,27 @@
+.notfound-page{
+    background-image: url("../../assets/lost2.jpg");
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainland button {
+    padding: 10px 20px;
+    font-size: 24px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #00e1ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.punmessage {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}

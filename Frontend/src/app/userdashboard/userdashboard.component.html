@@ -1,0 +1,141 @@
+<app-headeruser></app-headeruser>
+<!-- <div>
+  Your session ends on {{expired.toLocaleTimeString()}}
+</div> -->
+<div *ngIf="!showfeedback && !showIssueEditForm" class="issueslist">
+
+  <i class="fas fa-sort-amount-up" (click)="sortDescendingDates()">
+    Newer Issues First
+  </i>
+  <!-- sort by date descending icon -->
+  <br>
+  <i class="fas fa-sort-amount-down" (click)="sortAscendingDates()">
+    Older Issues First
+  </i>
+  <br>
+  <button type="button" class="btn btn-primary ml-8" (click)="viewresolved()">View Resolved Issues Only
+    {{rslvd}}</button>
+  <span>&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
+  </span>
+  <button type="button" class="btn btn-primary " (click)="viewunresolved()">View Unresolved Issues Only
+    {{unrslvd}}</button>
+  <span>&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
+  </span>
+  <button type="button" class="btn btn-primary " (click)="viewAllIssues()">View All Issues {{rslvd+unrslvd}}</button>
+
+
+  <div *ngIf="issues.length===0">
+    <br>
+    <br>
+    <div class="alert alert-secondary" role="alert">
+      No issue formed by you
+    </div>
+  </div>
+
+  <div *ngFor="let i of issues">
+
+    <div>
+
+      <div *ngIf="i.status=='resolved' &&  resolvedOnly" class="card border-success mb-3 mt-5"
+        style="max-width: 80rem;">
+        <div class="card-header">{{i.softwareName}}</div>
+        <div class="card-body text-primary">
+          <h5 class="card-title">{{i.softwareIssueTitle}}</h5>
+          <p class="card-text">
+            {{i.softwareIssueDescription}}
+            <br>
+            {{changedatefomat(i.dateissueform)}}
+          </p>
+          <p *ngIf="i.paidTicket" class="alert alert-info" role="alert">
+            This is a Paid Issue By you
+          </p>
+          <button type="button" class="btn btn-success" (click)="viewfeedback(i.issueid, i)">View Feedback</button>
+        </div>
+      </div>
+      <div *ngIf="i.status=='unresolved' && unresolvedOnly" class="card border-danger mb-3 mt-5"
+        style="max-width: 80rem;">
+        <div class="card-header">{{i.softwareName}}</div>
+        <div class="card-body text-primary">
+          <h5 class="card-title">{{i.softwareIssueTitle}}</h5>
+          <p class="card-text">
+            {{i.softwareIssueDescription}}
+            <br>
+            {{changedatefomat(i.dateissueform)}}
+          </p>
+
+          <p *ngIf="i.paidTicket" class="alert alert-info" role="alert">
+            This is a Paid Issue By you
+          </p>
+
+          <button type="button" class="btn btn-primary" (click)="editIssue(i)">Edit Issue</button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <button type="button" class="btn btn-primary" (click)="PageNumberinc()">Next Page</button>
+  <button type="button" class="btn btn-primary" (click)="PageNumberdec()">Previous Page</button>
+
+</div>
+
+<div *ngIf="showfeedback" class="issueslist">
+  <div class="card  mb-3 mt-5" style="max-width: 80rem;">
+    <div class="card-header ">Issue Title :{{currentIssue.softwareIssueTitle}}</div>
+    <div class="card-body text-dark">
+      <h5 class="card-title ">Issue Type : {{currentIssue.softwareIssueType}}</h5>
+      <p class="card-text ">Issue Description: {{currentIssue.softwareIssueDescription}}</p>
+    </div>
+  </div>
+  <div class="card border-success mb-3 mt-5" style="max-width: 80rem;">
+    <div class="card-header">Feedback by :{{feedback.expertid}}</div>
+    <div class="card-body text-primary">
+      <p class="card-text text-dark">Feedback Description: {{feedback.feedbackDescription}}</p>
+      <button type="button" class="btn btn-success" (click)="showfeedback=!showfeedback">close Feedback</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showIssueEditForm" class="issueslist">
+  <div class="card  mb-3 mt-5" style="max-width: 80rem;">
+    <div class="card-header ">Issue Title :{{currentIssue.softwareIssueTitle}}</div>
+    <div class="card-body text-dark">
+      <h5 class="card-title ">Issue Type : {{currentIssue.softwareIssueType}}</h5>
+      <p class="card-text ">Former Description: {{currentIssue.softwareIssueDescription}}</p>
+
+      <form [formGroup]="IssueForm" (ngSubmit)="editIssueInDb(currentIssue.issueid)" autocomplete="new-password">
+        <div class="form-group">
+          <label for="issueDescription">Issue Description</label>
+          <textarea formControlName="issueDescription" class="form-control" id="issueDescription" rows="3"
+            placeholder="minimum allowed letters=3 maximum allowed = 400"></textarea>
+        </div>
+        <br><br>
+        <button class="btn btn-secondary" type="submit">Edit Issue &#8594;</button>
+      </form>
+<br>
+      <button type="button" class="btn btn-success" (click)="showIssueEditForm=!showIssueEditForm">close Issue</button>
+    </div>
+  </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer class="footer">
+  <div class="container">
+    <p>Copyright &#64;Capgemini India Developed By pushpraj singh pawar</p>
+    <p>Contact number: 9302958459 Email: pushpraj-singh.pawar&#64;capgemini.com</p>
+    <p></p>
+  </div>
+</footer>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

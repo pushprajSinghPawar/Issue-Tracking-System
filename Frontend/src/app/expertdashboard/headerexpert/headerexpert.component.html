@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/expertdashboard">Issue Tracking Software</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+   
+    <ul class="navbar-nav">
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              View Account Info
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><span class="dropdown-item-text">username: {{currentUser.name}}</span></li>
+              <li><span class="dropdown-item-text">Role: {{currentUser.roles.at(0)}}</span></li>
+              <li><span class="dropdown-item-text">User ID: {{currentUser.expertid}}</span></li>
+              <li><span class="dropdown-item-text">Total Assigned Issues: {{currentUser.issuesids.length}}</span></li>
+              <hr>
+              <li><span class="dropdown-item-text">Your specializations are in::</span></li>              
+              <hr>
+              <ul *ngFor="let spec of currentUser.specialistIn">
+                <li><span class="dropdown-item-text">{{spec}}</span></li>
+              </ul>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

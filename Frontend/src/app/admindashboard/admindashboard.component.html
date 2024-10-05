@@ -1,0 +1,155 @@
+<!-- <app-adminheader></app-adminheader> -->
+
+<div>
+    <!-- <button (click)="generateReport()">
+        Genearte Report
+    </button> -->
+    <app-adminheader (notifyParent1)="onNotifyParent1()" (notifyParent2)="onNotifyParent2()"
+        (notifyParent3)="onNotifyParent3()" (notifyParent4)="onNotifyParent4()"></app-adminheader>
+
+</div>
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                <a class="nav-link"
+                [ngClass]="{'active':displayissueanalyticsbyexpert==true} "
+                    (click)="displayissueanalyticsbyexpert=true;  displayissueanalytics =false; displayalluser =false; disdisplayissueanalyticsbyuser=false;">View
+                    Expert's Analytics</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link"
+                [ngClass]="{'active':disdisplayissueanalyticsbyuser==true} "
+                    (click)="disdisplayissueanalyticsbyuser=true;displayissueanalyticsbyexpert=false; displayissueanalytics =false; displayalluser =false;">View
+                    User's Analytics</a>
+            </li>
+        
+            <li class="nav-item">
+                <a class="nav-link"
+                [ngClass]="{'active':displayissueanalytics==true} "
+                    (click)="displayissueanalytics=true; displayalluser =false; displayissueanalyticsbyexpert=false; disdisplayissueanalyticsbyuser=false;">View
+                    Issues's Analytics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                [ngClass]="{'active':displayalluser==true} "
+                    (click)="displayalluser=true; displayissueanalyticsbyexpert=false; displayissueanalytics =false;   disdisplayissueanalyticsbyuser=false;">View
+                    all Registered Users</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="analyticsDatapage">
+
+    <table *ngIf="disdisplayissueanalyticsbyuser" class="tbl">
+        <thead (click)="disdisplayissueanalyticsbyuser=!disdisplayissueanalyticsbyuser" style="cursor: pointer;">
+            <h1>
+                User's Issue Details
+            </h1>
+            <tr>
+                <th>UserId</th>
+                <th>total issues</th>
+                <th>resolved issues</th>
+                <th>unresolved issues</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a2 of analyticsData2|keyvalue ;let i=index">
+                <td>{{a2.key}}</td>
+                <td>{{a2.value.total}}</td>
+                <td>{{a2.value.resolved}}</td>
+                <td>{{a2.value.total - a2.value.resolved}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table *ngIf="displayissueanalyticsbyexpert" class="tbl">
+        <thead (click)="displayissueanalyticsbyexpert=!displayissueanalyticsbyexpert" style="cursor: pointer;">
+            <h1>
+                Expert Details
+            </h1>
+            <tr>
+                <th>Expert Id</th>
+                <th>total issues</th>
+                <th>resolved issues</th>
+                <th>unresolved issues</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a2 of analyticsData3|keyvalue ;let i=index">
+                <td>{{a2.key}}</td>
+                <td>{{a2.value.unresolved + a2.value.resolved}}</td>
+                <td>{{a2.value.resolved}}</td>
+                <td>{{a2.value.unresolved}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+    <table *ngIf="displayissueanalytics" class="tbl">
+        <thead (click)="displayissueanalytics=!displayissueanalytics" style="cursor: pointer;">
+            <h1>
+                Issue Details
+            </h1>
+            <tr>
+                <th>total issues</th>
+                <th>resolved issues</th>
+                <th>unresolved issues</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{analyticsData.RESOLVED+analyticsData.UNRESOLVED}}</td>
+                <td>{{analyticsData.RESOLVED}}</td>
+                <td>{{analyticsData.UNRESOLVED}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <table class="tbl" *ngIf="displayalluser">
+        <thead (click)="displayalluser=!displayalluser" style="cursor: pointer;">
+            <h1>
+                User Details
+            </h1>
+            <tr>
+                <th>UserName</th>
+                <th>UserId</th>
+                <th>Role of the User</th>
+                <th>Delete this user</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of creds ;let i=index">
+                <td>{{user.username}}</td>
+                <td>{{user.credentialsId}}</td>
+                <td>{{user.role}}</td>
+                <td (click)="deleteuser(i)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                        <path
+                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                    </svg>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<br>
+<footer class="footer">
+    <div class="container">
+        <p>Copyright &#64;Capgemini India Developed By pushpraj singh pawar</p>
+        <p>Contact number: 9302958459 Email: pushpraj-singh.pawar&#64;capgemini.com</p>
+        <p></p>
+    </div>
+</footer>

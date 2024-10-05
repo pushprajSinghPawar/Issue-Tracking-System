@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.what-we-do {
+  padding: 50px 0;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.services {
+  display: flex;
+  justify-content: space-around;
+}
+
+.service {
+  flex: 1;
+  padding: 20px;
+  border: 3px solid black;
+  border-radius: 5%;
+  margin: 5%;
+  width: 30%;
+  height: 400px;
+}
+
+.service h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.service p {
+  font-size: 1rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  background-color: black;
+  position: fixed;
+}
+
+footer .container {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px 15px;
+}
+
+footer .container p {
+  margin: 5px 0;
+}
+
+
+
+
+.testimonials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  max-width: 540px;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px 0 0 5px;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.card-text small {
+  color: #777;
+}
+
+.mission {
+  background-color: #f8f9fa;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.mission .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mission h2 {
+  color: #007bff; 
+  font-size: 32px; 
+  font-weight: bold;
+  margin-bottom: 20px; 
+}
+
+.mission p {
+  font-size: 18px;
+  line-height: 1.6; 
+  margin-bottom: 30px;
+}
+
+.mission br {
+  display: none;
+}
+
+.services :hover {
+  transform: translateY(-20px);
+}

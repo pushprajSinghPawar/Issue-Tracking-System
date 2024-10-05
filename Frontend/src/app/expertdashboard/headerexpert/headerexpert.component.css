@@ -1,0 +1,15 @@
+.login-hover:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15%;
+}
+
+.dropdown-item-text {
+    width: 500px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+  
+.nav-item :hover{
+    border-radius: 5%;
+    
+    cursor: pointer;
+  }

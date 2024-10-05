@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="D:\be\UserMicroservice"/>
+			<item value="D:\be\Security-Service"/>
+			<item value="D:\be\IssueServer"/>
+			<item value="D:\be\IssueDataMicroService"/>
+			<item value="D:\be\ExpertMicroservice"/>
+			<item value="D:\be\ApiGateway"/>
+			<item value="D:\be\AdminMicroservice"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+</section>

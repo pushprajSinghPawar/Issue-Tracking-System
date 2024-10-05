@@ -1,0 +1,30 @@
+<form [formGroup]="registrationForm" (ngSubmit)="finalregister()" autocomplete="new-password">
+    <h1>Registration</h1>
+
+    <div class="form-control">
+        <label for="name">Name</label>
+        <input formControlName="name" id="name" autocomplete="new-password" type="text" placeholder="Username must be more than 3 and less than 10" />
+    </div>
+
+    <div class="form-control">
+        <label for="password">Password</label>
+        <input formControlName="password" id="password" autocomplete="new-password" placeholder="Password must be more than 3 and less than 10" type="password" />
+    </div>
+
+    <div class="form-control">
+        <label for="confirmpassword">Confirm Password</label>
+        <input formControlName="confirmpassword" id="confirmpassword" autocomplete="off" placeholder="confirm password must be same as ablove password given" type="text" />
+    </div>
+
+    <div class="form-control">
+        <label for="specialization">Specialization</label>
+        <input formControlName="specialization" id="specialization" autocomplete="off" type="text" (input)="updatespecs()" placeholder="separate each specialization by comma"/>
+        <br>
+        <ul>
+            <li class="tagstyle" *ngFor="let specialization of specializationArray">{{ specialization }} </li>
+        </ul>
+    </div>
+
+
+    <button type="submit">Register &#8594;</button>
+</form>

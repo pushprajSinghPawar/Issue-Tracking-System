@@ -1,0 +1,123 @@
+<app-headerexpert></app-headerexpert>
+<div>
+    Your session ends on {{expired.toLocaleTimeString()}}
+</div>
+<div class="issueslist" *ngIf="!viewfeedbackmode">
+    <i class="fas fa-sort-amount-up" (click)="sortDescendingDates()">
+        Newer Issues First
+    </i>
+    <!-- sort by date descending icon -->
+    <br>
+    <i class="fas fa-sort-amount-down" (click)="sortAscendingDates()">
+        Older Issues First
+    </i>
+    <br>
+    <button type="button" class="btn btn-primary ml-8" (click)="viewresolved()">View Resolved Issues Only {{rslvd}}</button>
+    <span>&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+    </span>
+    <button type="button" class="btn btn-primary " (click)="viewunresolved()">View Unresolved Issues Only {{unrslvd}}</button>
+    <span>&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+    </span>
+    <button type="button" class="btn btn-primary " (click)="viewAllIssues()">View All Issues {{totalIssues}}</button>
+
+    <div *ngIf="issues.length===0">
+        <br>
+        <br>
+        <div class="alert alert-secondary" role="alert">
+            No issue delegated to you 
+          </div>
+    </div>
+
+    <div *ngFor="let i of issues">
+        <div *ngIf="allissues || resolvedOnly&&i.status==='resolved' || unresolvedOnly&&i.status==='unresolved'">
+            <div class="card  mb-3 mt-5"
+                [ngClass]="{'border-success': i.status=='resolved', 'border-danger':i.status==='unresolved'}"
+                style="max-width: 80rem;">
+                <div class="card-header">{{i.softwareIssueTitle}}</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title">{{i.softwareName}}</h5>
+                    <p class="card-text ">
+                        {{i.softwareIssueDescription}}
+                        <br>
+                        {{changedatefomat(i.dateissueform)}}
+                    </p>
+                    <p *ngIf="i.paidTicket && i.status==='unresolved'" class="alert alert-info" role="alert">
+                            This is a high priority issue resolve it fast
+                    </p>
+                    <p *ngIf="i.paidTicket && i.status==='resolved'" class="alert alert-info" role="alert">
+                        This was a high priority you resolved Thankyou
+                </p>
+                
+                    <div>
+                        <span *ngIf="i.status==='resolved'">
+                            <button type="button" (click)="viewfeedback(i.issueid,i)" class="btn btn-success">View
+                                Feedback</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                        <button type="button" (click)="updatefeedback(i.issueid, i)" class="btn btn-secondary">Update
+                            Feedback</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="viewfeedbackmode" class="issueslist">
+    <div class="card  mb-3 mt-5" style="max-width: 80rem;">
+        <div class="card-header text-dark">Issue raised by:
+            <em>
+                {{issue.issueid.split("-")[1]}}
+            </em>
+        </div>
+        <div class="card-body text-primary">
+            <h5 class="card-title text-dark">
+                <em>
+                    Issue Tilte:
+                </em>
+                {{issue.softwareIssueTitle}}
+            </h5>
+            <h6>
+                Issue created at : {{changedatefomat(issue.dateissueform)}}
+            </h6>
+            <p class="card-text">
+                {{issue.softwareIssueDescription}}
+            </p>
+        </div>
+        <div class="card-body text-primary" *ngIf="feedback.feedbackDescription!==''">
+            <h5 class="card-title text-dark">My Feedback</h5>
+            <p class="card-text">
+                {{feedback.feedbackDescription}}
+            </p>
+        </div>
+        <button type="button" (click)="closefeedback()" class="btn btn-secondary">Close Feedback</button>
+    </div>
+    <div *ngIf="editfeedbackmode">
+        <form [formGroup]="feedbackForm" (ngSubmit)="editFeedbackInDb(feedback.issueid)" autocomplete="new-password">
+            <div class="form-group">
+                <label for="feedbackDescription">Feedback Description</label>
+                <textarea formControlName="feedbackDescription" class="form-control" id="feedbackDescription"
+                    rows="3" placeholder="minimum allowed letters=3 maximum allowed = 400"></textarea>
+            </div>
+            <br><br>
+            <button class="btn btn-secondary" type="submit">Edit feedback &#8594;</button>
+        </form>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer class="footer">
+  <div class="container">
+    <p>Copyright &#64;Capgemini India Developed By pushpraj singh pawar</p>
+      <p>Contact number: 9302958459 Email: pushpraj-singh.pawar&#64;capgemini.com</p>
+      <p></p>
+  </div>
+</footer> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
