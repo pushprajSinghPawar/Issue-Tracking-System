@@ -62,4 +62,9 @@ public class AuthServiceImpl implements AuthService{
 		return jwtService.validateToken(token);
 	}
 
+	@Override
+	public boolean uniqueOrNot(String name) {
+		return authRepo.findByUsername(name).isEmpty();
+	}
+
 }

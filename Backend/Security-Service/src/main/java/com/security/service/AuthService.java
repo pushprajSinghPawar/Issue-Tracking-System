@@ -37,4 +37,6 @@ public interface AuthService {
 	 */
 	public boolean validateToken(String token);
 
+	public boolean uniqueOrNot(String name);
+
 }

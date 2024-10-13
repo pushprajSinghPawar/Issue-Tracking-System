@@ -76,6 +76,9 @@ public class AuthController {
 	 */
 	@PostMapping("/addUser")
 	public User addUser( @RequestBody @Valid User user) throws UserNotAddedException, Exception{
+		if(authService.uniqueOrNot(user.getName()) == false ){
+			throw new UserNotAddedException("NON UNIQUE NAME FOR USERNAME");
+		}
 		System.out.println(user);
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setUserid(user.getName()+user.getPassword().substring(user.getPassword().length()-5).replaceAll("/","l"));
@@ -85,6 +88,9 @@ public class AuthController {
 		}else {
 			logger.info("User registered done "+user);
 		}
+		if(user.getRoles()==null || user.getRoles().isEmpty()) {
+			user.setRoles(Arrays.asList("user"));
+		}
 		return user;
 	}
 	
@@ -92,12 +98,18 @@ public class AuthController {
 	 * Adds the cred.
 	 *
 	 * @param credential the credential
-	 * @return the credentials
+	 * @return the credentials used only for admin
+	 * @throws UserNotAddedException 
 	 */
 	@PostMapping("/addCred")
-	public credentials addCred(@RequestBody credentials credential) {
-		credential.setPassword(bCryptPasswordEncoder.encode(credential.getPassword()));
-		credential.setCredentialsId(credential.getUsername()+credential.getPassword().substring(credential.getPassword().length()-5).replaceAll("/","l"));
+	public credentials addCred(@RequestBody credentials credential) throws UserNotAddedException {
+		if(authService.uniqueOrNot(credential.getUsername()) == false ){
+			throw new UserNotAddedException("NON UNIQUE NAME FOR USERNAME");
+		}
+		if(credential.getRole().equals("admin")) {
+			credential.setCredentialsId(credential.getUsername()+credential.getPassword().substring(credential.getPassword().length()-5).replaceAll("/","l"));
+			credential.setPassword(bCryptPasswordEncoder.encode(credential.getPassword()));
+		}
 		return authRepo.save(credential);
 	}
 	
@@ -111,8 +123,11 @@ public class AuthController {
 	 */
 	@PostMapping("/addExpert")
 	public Expert addExpert(@RequestBody @Valid Expert expert) throws UserNotAddedException, Exception{
+		if(authService.uniqueOrNot(expert.getName()) == false ){
+			throw new UserNotAddedException("NON UNIQUE NAME FOR USERNAME");
+		}
 		expert.setPassword(bCryptPasswordEncoder.encode(expert.getPassword()));
-		if(expert.getRoles()==null) {
+		if(expert.getRoles()==null || expert.getRoles().isEmpty()) {
 			expert.setRoles(Arrays.asList("expert"));
 		}
 		expert.setExpertid(expert.getName()+expert.getPassword().substring(expert.getPassword().length()-5).replaceAll("/","l"));
