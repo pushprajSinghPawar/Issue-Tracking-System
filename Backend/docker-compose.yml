@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  admin-microservice:
+    build:
+      context: ./AdminMicroservice
+    ports:
+      - "8082:8082"  # Map host port 8082 to container port 8082
+  
+  user-microservice:
+    build:
+      context: ./UserMicroservice
+    ports:
+      - "8080:8080"  # Map host port 8080 to container port 8080
+  
+  expert-microservice:
+    build:
+      context: ./ExpertMicroservice
+    ports:
+      - "8085:8080"  # Map host port 8085 to container port 8080
+  
+  gateway:
+    build:
+      context: ./ApiGateway
+    ports:
+      - "9091:9091"  # Map host port 9091 to container port 9091
+  
+  issue-data-microservice:
+    build:
+      context: ./IssueDataMicroservice
+    ports:
+      - "8083:8080"  # Map host port 8083 to container port 8080
+
+  security-service:
+    build:
+      context: ./Security-Service
+    ports:
+      - "9092:8080"  # Map host port 9092 to container port 8080
